@@ -24,10 +24,12 @@ def get_states():
     """Return a list of state abbreviations from the demographic data."""
     with open('demographics.json') as demographics_data:
         counties = json.load(demographics_data)
-    states=[]
-    for c in counties:
-        if c["State"] not in states:
-            states.append(c["State"])
+    #states=[]
+    #for c in counties:
+        #if c["State"] not in states:
+            #states.append(c["State"])
+    #a more concise but less flexible and less easy to read version is below.
+    states=list(set([c["State"] for c in counties])) #sets do not allow duplicates and the set function is optimized for removing duplicates
     return states
 
 def county_most_under_18(state):
