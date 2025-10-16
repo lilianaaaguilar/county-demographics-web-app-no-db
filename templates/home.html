@@ -5,17 +5,34 @@
     </head>
     <body>
 
-        <form action="/showFact">
-          <select name="state"> <!-- add onchange="this.form.submit()" to submit/update the form when an option is selected.  Usefull for then displaying county options. -->
+        <form action="/" method="get">
+          <select name="state" onchange="this.form.submit()"> <!-- add onchange="this.form.submit()" to submit/update the form when an option is selected.  Usefull for then displaying county options. -->
             {{ state_options }}
           </select>
+          </form>
+          
+        <form action="/showFact" method="get">
+        <input type="hidden" name="state" value="{{ selected_state }}">
+          
+		{% if county_options %}
+		<select name="county">
+			{{ county_options }}
+		</select>
+		{% endif %}
+
           <br><br>
           <input type="submit" value="Get a fun fact!">
         </form>
         <div id="funFact">
+        {% if funFact1 %}
             <p>{{ funFact1 }}</p>
             <p>{{ funFact2 }}</p>
             <p>{{ funFact3 }}</p>
+		{% endif %}
+		
+		{% if funFact4 %}
+			<p>{{ funFact4 }}</p>
+		{% endif %}
         </div>
 
     </body>
